@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using WeatherStationService.GrpcServices;
+using WeatherStationService.Domain.Contracts;
+using WeatherStationService.Domain.Models;
 
 namespace WeatherStationService.Controllers
 {

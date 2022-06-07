@@ -1,3 +1,6 @@
+using WeatherStationService.Domain.Contracts;
+using WeatherStationService.Domain.Infrastructure.Configuration;
+using WeatherStationService.Domain.Models;
 using WeatherStationService.GrpcServices;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
