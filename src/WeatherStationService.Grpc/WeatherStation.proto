@@ -1,0 +1,22 @@
+﻿syntax = "proto3";
+option csharp_namespace = "WeatherStationService.Grpc";
+package WeatherStationService;
+
+import "google/protobuf/empty.proto";
+
+
+service WeatherStationApiGrpc
+{
+    rpc GetMeasurements (google.protobuf.Empty) returns (stream MeasurementList) {}
+}
+
+message Measurement {
+	string sensor = 1;
+    int32 degrees_celsius = 2;
+    int32 humidity = 3;
+    int32 co2_ppm = 4;
+}
+
+message MeasurementList {
+    repeated Measurement measurements = 1;
+}
