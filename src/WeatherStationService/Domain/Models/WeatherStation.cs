@@ -10,6 +10,6 @@ namespace WeatherStationService.Domain.Models
             new Sensor("Street", 300, 600),
         };
 
-        public IEnumerable<SensorData> GetMeasurements() => _sensors.Select(s => s.GetData());
+        public IEnumerable<SensorData> GetSensorsData() => _sensors.Select(s => s.GetData());
     }
 }

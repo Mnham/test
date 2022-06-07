@@ -5,7 +5,7 @@ using WeatherStationService.Domain.Models;
 
 namespace WeatherStationService.Controllers
 {
-    [Route("events")]
+    [Route("sensors")]
     public class WeatherStationController : Controller
     {
         private readonly IWeatherStation _weatherStation;
@@ -13,9 +13,9 @@ namespace WeatherStationService.Controllers
         public WeatherStationController(IWeatherStation weatherStation) => _weatherStation = weatherStation;
 
         [HttpGet]
-        public Task<List<SensorData>> GetEvent()
+        public Task<SensorData[]> GetSensors()
         {
-            List<SensorData> result = _weatherStation.GetMeasurements().ToList();
+            SensorData[] result = _weatherStation.GetSensorsData().ToArray();
 
             return Task.FromResult(result);
         }

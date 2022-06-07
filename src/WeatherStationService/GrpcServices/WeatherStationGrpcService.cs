@@ -33,7 +33,7 @@ namespace WeatherStationService.GrpcServices
                     await Task.Delay(delay, context.CancellationToken);
 
                     MeasurementList result = new();
-                    IEnumerable<Measurement> measurements = _weatherStation.GetMeasurements().Map(Mapper.SensorDataToMeasurement);
+                    IEnumerable<Measurement> measurements = _weatherStation.GetSensorsData().Map(Mapper.SensorDataToMeasurement);
                     foreach (Measurement measurement in measurements)
                     {
                         result.Measurements.Add(measurement);
