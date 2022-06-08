@@ -26,16 +26,16 @@ namespace WeatherStationService.GrpcServices
         {
             try
             {
+                IAsyncEnumerable<MeasurementRequest> req = requestStream.ReadAllAsync();
+
+                SensorRequest request = SensorRequest.Nothing;
+                await foreach (MeasurementRequest item in req)
+                {
+                    request = (SensorRequest)item.Request;
+                }
+
                 while (!context.CancellationToken.IsCancellationRequested)
                 {
-                    IAsyncEnumerable<MeasurementRequest> req = requestStream.ReadAllAsync();
-
-                    SensorRequest request = SensorRequest.Nothing;
-                    await foreach (MeasurementRequest item in req)
-                    {
-                        request = (SensorRequest)item.Request;
-                    }
-
                     int delay = _settings.DataUpdateFrequency;
                     await Task.Delay(delay, context.CancellationToken);
 

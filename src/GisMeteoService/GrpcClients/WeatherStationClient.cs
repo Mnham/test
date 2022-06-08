@@ -1,30 +1,7 @@
-﻿using Grpc.Net.Client;
-
-using WeatherStationService.Grpc;
+﻿using WeatherStationService.Grpc;
 
 namespace GisMeteoService.GrpcClients
 {
-    public sealed class WeatherStationClient : WeatherStationApiGrpc.WeatherStationApiGrpcClient
-    {
-        public WeatherStationClient(string address)
-        {
-            using GrpcChannel channel = GrpcChannel.ForAddress(address);
-            Client = new WeatherStationApiGrpc.WeatherStationApiGrpcClient(channel);
-        }
-
-        public WeatherStationApiGrpc.WeatherStationApiGrpcClient Client { get; set; }
-
-        public async Task Test(CancellationToken stoppingToken)
-        {
-            await x.RequestStream.WriteAsync(new MeasurementRequest() { Request = 1 });
-
-            while (await x.ResponseStream.MoveNext(stoppingToken))
-            {
-                MeasurementList e = x.ResponseStream.Current;
-            }
-        }
-    }
-
     public class SomeHostedService : BackgroundService
     {
         private readonly IServiceProvider _provider;
@@ -42,11 +19,10 @@ namespace GisMeteoService.GrpcClients
             {
                 MeasurementList e = eventResponseStream.ResponseStream.Current;
 
-                foreach (var item in collection)
+                foreach (Measurement item in e.Measurements)
                 {
+                    Console.WriteLine(item.Co2Ppm);
                 }
-
-                Console.WriteLine();
             }
         }
     }
