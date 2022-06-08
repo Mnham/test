@@ -7,7 +7,7 @@ namespace WeatherStationService.Infrastructure.Helpers
     {
         public static Measurement SensorDataToMeasurement(SensorData sensorData) => new()
         {
-            Sensor = sensorData.Name,
+            Place = (int)sensorData.Place,
             DegreesCelsius = sensorData.DegreesCelsius,
             Co2Ppm = sensorData.Co2Ppm,
             Humidity = sensorData.Humidity

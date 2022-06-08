@@ -15,7 +15,7 @@ namespace WeatherStationService.Controllers
         [HttpGet]
         public Task<SensorData[]> GetSensors()
         {
-            SensorData[] result = _weatherStation.GetSensorsData().ToArray();
+            SensorData[] result = _weatherStation.GetSensorsData(SensorRequest.All).ToArray();
 
             return Task.FromResult(result);
         }

@@ -6,10 +6,27 @@ namespace WeatherStationService.Domain.Models
     {
         private readonly List<Sensor> _sensors = new()
         {
-            new Sensor("Home", 600, 1200),
-            new Sensor("Street", 300, 600),
+            new Sensor(SensorPlace.Home, 600, 1200),
+            new Sensor(SensorPlace.Street, 300, 600),
         };
 
-        public IEnumerable<SensorData> GetSensorsData() => _sensors.Select(s => s.GetData());
+        public IEnumerable<SensorData> GetSensorsData(SensorRequest request) => _sensors.Where(s => GetPredicate(s, request)).Select(s => s.GetData());
+
+        private bool GetPredicate(Sensor sensor, SensorRequest request) => request switch
+        {
+            SensorRequest.Nothing => false,
+            SensorRequest.All => true,
+            SensorRequest.Home => sensor.Place == SensorPlace.Home,
+            SensorRequest.Street => sensor.Place == SensorPlace.Street,
+            _ => throw new NotImplementedException(),
+        };
+    }
+
+    public enum SensorRequest
+    {
+        Nothing,
+        All,
+        Home,
+        Street,
     }
 }

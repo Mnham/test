@@ -4,6 +4,6 @@ namespace WeatherStationService.Domain.Contracts
 {
     public interface IWeatherStation
     {
-        IEnumerable<SensorData> GetSensorsData();
+        IEnumerable<SensorData> GetSensorsData(SensorRequest request);
     }
 }

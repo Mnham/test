@@ -2,19 +2,22 @@
 option csharp_namespace = "WeatherStationService.Grpc";
 package WeatherStationService;
 
-import "google/protobuf/empty.proto";
-
 
 service WeatherStationApiGrpc
 {
-    rpc GetMeasurements (google.protobuf.Empty) returns (stream MeasurementList) {}
+    rpc GetMeasurements (stream MeasurementRequest) returns (stream MeasurementList) {}
 }
 
 message Measurement {
-	string sensor = 1;
+	int32 place = 1;
     int32 degrees_celsius = 2;
     int32 humidity = 3;
     int32 co2_ppm = 4;
+    int64 timestamp = 5;
+}
+
+message MeasurementRequest {
+    int32 request = 1;
 }
 
 message MeasurementList {
